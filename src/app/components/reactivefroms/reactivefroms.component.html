@@ -1,0 +1,76 @@
+<div class="container">
+    <form class="row g-3" (ngSubmit)="OnUserSave()" [formGroup]="userFrom">
+        <div class="col-md-4">
+            <label for="validationCustom01">First name</label>
+            <input type="text" formControlName="firstName" class="form-control" id="validationCustom01"
+                placeholder="First name" value="Mark" required>
+            <div >
+                @if(userFrom.controls['firstName'].errors?.['required'] && userFrom.controls['firstName'].touched && userFrom.controls['firstName'].dirty)
+                {
+                
+                <span class="text-danger">
+                    This is required
+                </span>
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom02">Last name</label>
+            <input type="text" formControlName="lastName" class="form-control" id="validationCustom02"
+                placeholder="Last name" value="Otto" required>
+            <div>
+                <span *ngIf="userFrom.controls['lastName'].errors?.['required'] && userFrom.controls['lastName'].touched && userFrom.controls['lastName'].dirty" class="text-danger"> Last Name is Required</span>
+                <span *ngIf="userFrom.controls['lastName'].errors?.['minlength']" class="text-danger">Min 4 chars Required</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustomUsername">Username</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroupPrepend">&#64;</span>
+                </div>
+                <input type="text" formControlName="userName" class="form-control" id="validationCustomUsername"
+                    placeholder="Username" aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback">
+                    Please choose a username.
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom03">City</label>
+            <input type="text" formControlName="city" class="form-control" id="validationCustom03" placeholder="City"
+                required>
+            <div class="invalid-feedback">
+                Please provide a valid city.
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom04">State</label>
+            <input type="text" formControlName="state" class="form-control" id="validationCustom04" placeholder="State"
+                required>
+            <div class="invalid-feedback">
+                Please provide a valid state.
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom05">Zip</label>
+            <input type="text" formControlName="zipCode" class="form-control" id="validationCustom05" placeholder="Zip"
+                required>
+            <div class="invalid-feedback">
+                Please provide a valid zip.
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" formControlName="isTermsAggree" type="checkbox" value=""
+                    id="invalidCheck" required>
+                <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                </label>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button class="btn btn-primary" [disabled]="userFrom.invalid" type="submit">Submit form</button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,89 @@
+<div class="container">
+    <h2>User Form</h2>
+    <form #form="ngForm" class="row g-3 needs-validation">
+        <div class="col-md-4">
+            <label>First name <span class="text-danger"> *</span></label>
+            <input type="text" name="firstName" #fname="ngModel" required class="form-control" [(ngModel)]="userObj.firstName">
+            <div class="text-danger">
+                @if(fname.errors?.['required'] && fname.touched && fname.dirty)
+                {
+                <span>This is Required</span>
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label for="validationCustom02">Last name</label>
+            <input type="text" name="lastName" #lname="ngModel" required minlength="4" class="form-control" [(ngModel)]="userObj.lastName">
+            <div class="text-danger">
+                @if(lname.errors?.['required'] && lname.touched && lname.dirty)
+                {
+                <span>This is Required</span>
+                }
+                @if(lname.errors?.['minlength'] && lname.touched && lname.dirty)
+                {
+                <span>Min 4 Chars required</span>
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label>Username</label>
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">&#64;</span>
+                </div>
+                <input type="text" name="userName" #uname="ngModel" required class="form-control" [(ngModel)]="userObj.userName">
+                <div class="text-danger">
+                    <span *ngIf="uname.errors?.['required'] && uname.touched && uname.dirty">userName is Required</span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label>City</label>
+            <input type="text" name="city" #city="ngModel" required class="form-control" [(ngModel)]="userObj.city">
+            <div class="text-danger">
+                <span *ngIf="city.errors?.['required'] && city.touched && city.dirty">City is Required</span>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label>State</label>
+            <select class="form-select" name="state" #state="ngModel" required [(ngModel)]="userObj.state">
+                <option selected disabled value="">Choose.....</option>
+                <option value="Maharastra">Maharastra</option>
+                <option value="Goa">Goa</option>
+                <option value="Punjab">Punjab</option>
+            </select>
+            <div class="text-danger">
+                @if(state.errors?.['required'] && state.touched && state.dirty)
+                {
+                <span>This is Required</span>
+                }
+                @if(state.errors?.['minlength'] && state.touched && state.dirty)
+                {
+                <span>Min 4 Chars required</span>
+                }
+            </div>
+        </div>
+        <div class="col-md-4">
+            <label>Zip</label>
+            <input type="text" name="zipCode" class="form-control" [(ngModel)]="userObj.zipCode">
+        </div>
+        <div class="form-group">
+            <div class="form-check">
+                <input class="form-check-input" name="isTermsAggree" #isTermsAggree="ngModel" required type="checkbox" value=""
+                    [(ngModel)]="userObj.isTermsAggree">
+                <label class="form-check-label" for="invalidCheck">
+                    Agree to terms and conditions
+                </label>
+                @if(isTermsAggree.errors?.['required'] && isTermsAggree.touched && isTermsAggree.dirty)
+                {
+                <span>This is Required</span>
+                }
+             
+            </div>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary" [disabled]="form.invalid"  type="submit" (click)="onSave()">Submit form</button>
+        </div>
+    </form>
+
+</div>
